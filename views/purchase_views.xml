@@ -8,7 +8,7 @@
             <xpath expr="//button[@name='action_view_invoice']" position="after">
                 <!-- <link rel="stylesheet" href="/purchase_order_enhancement/static/src/css/button.css"/> -->
                 <field name="active" invisible="1"/>
-                <button name="button_archive" type="object" class="oe_stat_button" attrs="{'invisible':['|', '&amp;', ('state', 'not in', ('done', 'cancel')), ('active', '=', True), ('active', '=', False)]}" icon="fa-archive" string="Archive" />
+                <button name="button_archive" type="object" class="oe_stat_button" attrs="{'invisible':['|', '&amp;', ('state', 'not in', ('done', 'cancel')), ('active', '=', True), ('active', '=', False)]}" icon="fa-archive" string="Archive" groups="purchase.group_purchase_manager"/>
             </xpath>
         </field>
     </record>

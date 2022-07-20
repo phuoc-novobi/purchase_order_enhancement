@@ -1,3 +1,4 @@
+from tokenize import group
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
@@ -9,7 +10,9 @@ class PurchaseOrder(models.Model):
         'Is Active?',
         default=True,
         readonly=True,
-        states={'done': [('readonly', False)], 'cancel': [('readonly', False)]}
+        states={'done': [('readonly', False)], 'cancel': [
+            ('readonly', False)]},
+        groups='purchase.group_purchase_manager'
     )
 
     def button_archive(self):
