@@ -11,7 +11,7 @@
     'version': '15.0',
     'depends': ['base', 'purchase'],
     'data': [
-        'security/purchase_security.xml',
+        'data/ir_cron_data.xml',
         'security/ir.model.access.csv',
         'views/purchase_views.xml',
         'views/res_config_settings.xml',

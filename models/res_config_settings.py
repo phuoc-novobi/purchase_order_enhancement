@@ -1,12 +1,11 @@
-from email.policy import default
-from odoo import models, fields
+from odoo import api, models, fields
 
 
 class ConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    group_archive_purchase = fields.Boolean(
-        "Archive Cancelled/Locked Purchase Orders",
-        default=False,
-        implied_group='purchase_order_enhancement.group_archive_purchase'
+    lifespan = fields.Integer(
+        string='Lifespan',
+        related='company_id.lifespan',
+        readonly=False
     )

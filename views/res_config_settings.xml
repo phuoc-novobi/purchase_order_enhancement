@@ -7,13 +7,14 @@
         <field name="arch" type="xml">
             <xpath expr="//div[@id='auto_receipt_reminder']" position="after">
                 <div class="col-12 col-lg-6 o_setting_box" id="enable_archive_purchase">
-                    <div class="o_setting_left_pane">
-                        <field name="group_archive_purchase"/>
-                    </div>
                     <div class="o_setting_right_pane">
-                        <label for="group_archive_purchase"/>
+                        <label for="lifespan" string="Archive Purchase Order Lifespan"/>
                         <div class="text-muted">
-                            Enable Archive feature on your purchase orders
+                            Automatically archive old locked/cancelled Purchase Orders with lifespan
+                        </div>
+                        <div class="content-group">
+                            <field name="lifespan" class="o_light_label" style="width: 30px;"/>
+                            <span>day(s)</span>
                         </div>
                     </div>
                 </div>

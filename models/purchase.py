@@ -1,5 +1,18 @@
 from odoo import api, models, fields
 from odoo.exceptions import UserError
+from datetime import timedelta
+
+
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+
+    lifespan = fields.Integer('Life Span', default=1)
+
+    @api.constrains('lifespan')
+    def _check_lifespan_negative(self):
+        if self.lifespan < 0:
+            raise models.ValidationError(
+                'Lifespan must be a non-negative number')
 
 
 class PurchaseOrder(models.Model):
@@ -17,13 +30,17 @@ class PurchaseOrder(models.Model):
     def button_archive(self):
         if self.state in ['cancel', 'done']:
             self.write({'active': False})
-        return {}
 
     def action_archive(self):
         if len(self.filtered(lambda record: record.state not in ['done', 'cancel'])) > 0:
             raise UserError(
                 'You cannot archive Purchase Orders that are not done/cancelled!')
-        for record in self:
+        self.write({'active': False})
+
+    def _schedule_archive(self):
+        today = fields.Datetime.today()
+        lifespan = self.env.company.lifespan
+        for record in self.env['purchase.order'].search([]).filtered(lambda r: r.write_date + timedelta(days=lifespan) < today and r.state in ['done', 'cancel']):
             record.write({'active': False})
 
 
