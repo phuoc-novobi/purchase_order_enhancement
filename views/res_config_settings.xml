@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_setting_view_form_purchase_archive" model="ir.ui.view">
+        <field name="name">res.config.setting.view.form.purchase.archive</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='auto_receipt_reminder']" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" id="enable_archive_purchase">
+                    <div class="o_setting_left_pane">
+                        <field name="group_archive_purchase"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="group_archive_purchase"/>
+                        <div class="text-muted">
+                            Enable Archive feature on your purchase orders
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

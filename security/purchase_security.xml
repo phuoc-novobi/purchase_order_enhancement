@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_archive_purchase" model="res.groups">
+        <field name="name">Enable archive cancelled/locked Purchase Orders</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+</odoo>
