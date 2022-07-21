@@ -3,18 +3,6 @@ from odoo.exceptions import UserError
 from datetime import timedelta
 
 
-class ResCompany(models.Model):
-    _inherit = 'res.company'
-
-    lifespan = fields.Integer('Life Span', default=1)
-
-    @api.constrains('lifespan')
-    def _check_lifespan_negative(self):
-        if self.lifespan < 0:
-            raise models.ValidationError(
-                'Lifespan must be a non-negative number')
-
-
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
@@ -24,7 +12,7 @@ class PurchaseOrder(models.Model):
         readonly=True,
         states={'done': [('readonly', False)], 'cancel': [
             ('readonly', False)]},
-        groups='purchase.group_purchase_manager, purchase_order_enhancement.group_archive_purchase'
+        groups='purchase.group_purchase_manager'
     )
 
     def button_archive(self):
