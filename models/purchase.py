@@ -14,6 +14,7 @@ class PurchaseOrder(models.Model):
             ('readonly', False)]},
         groups='purchase.group_purchase_manager'
     )
+    us_phone_number = fields.Char('US Phone Number')
 
     def button_archive(self):
         if self.state in ['cancel', 'done']:
