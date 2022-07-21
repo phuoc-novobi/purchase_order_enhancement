@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_setting_view_form_purchase_archive" model="ir.ui.view">
+        <field name="name">res.config.setting.view.form.purchase.archive</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='auto_receipt_reminder']" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" id="enable_archive_purchase">
+                    <div class="o_setting_right_pane">
+                        <label for="lifespan" string="Archive Purchase Order Lifespan"/>
+                        <div class="text-muted">
+                            Automatically archive old locked/cancelled Purchase Orders with lifespan
+                        </div>
+                        <div class="content-group">
+                            <field name="lifespan" class="o_light_label" style="width: 30px;"/>
+                            <span>day(s)</span>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
