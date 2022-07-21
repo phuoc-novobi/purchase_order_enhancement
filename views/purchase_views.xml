@@ -24,20 +24,6 @@
         </field>
     </record>
 
-    <record id="archive_multiple_purchase_orders_form" model="ir.ui.view">
-        <field name="name">archive.multiple.purchase.orders.form</field>
-        <field name="model">archive.purchase.order</field>
-        <field name="arch" type="xml">
-            <form>
-                <field name="archive_purchase_order_ids"/>
-                <footer>
-                    <field name="button_archive_invisible" invisible="1"/>
-                    <button name="action_archive" type="object" attrs="{'invisible': [('button_archive_invisible', '=', True)]}" class="btn-primary" string="Archive"/>
-                </footer>
-            </form>
-        </field>
-    </record>
-
     <record id="archive_purchase_order" model="ir.actions.server">
         <field name="name">Archive Purchase Orders</field>
         <field name="model_id" ref="purchase.model_purchase_order"/>
@@ -49,14 +35,4 @@
                 action = records.action_archive()
         </field>
     </record>
-
-    <record id="archive_multiple_purchase_orders" model="ir.actions.act_window">
-        <field name="name">Archive Purchase Orders</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">archive.purchase.order</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
-
-    <menuitem id="menu_archive_attribute_action" action="archive_multiple_purchase_orders" parent="purchase.menu_purchase_config" sequence="1"/>
 </odoo>

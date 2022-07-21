@@ -12,6 +12,7 @@
     'depends': ['base', 'purchase'],
     'data': [
         'data/ir_cron_data.xml',
+        'wizard/archive_purchase_order_view.xml',
         'security/ir.model.access.csv',
         'views/purchase_views.xml',
         'views/res_config_settings.xml',
