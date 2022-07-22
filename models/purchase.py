@@ -9,9 +9,6 @@ class PurchaseOrder(models.Model):
     active = fields.Boolean(
         'Is Active?',
         default=True,
-        readonly=True,
-        states={'done': [('readonly', False)], 'cancel': [
-            ('readonly', False)]},
         groups='purchase.group_purchase_manager'
     )
     us_phone_number = fields.Char('US Phone Number')
@@ -29,5 +26,6 @@ class PurchaseOrder(models.Model):
     def _schedule_archive(self):
         today = fields.Datetime.today()
         lifespan = self.env.company.lifespan
-        for record in self.env['purchase.order'].search([]).filtered(lambda r: r.write_date + timedelta(days=lifespan) < today and r.state in ['done', 'cancel']):
+        expire_date = today - timedelta(days=lifespan)
+        for record in self.env['purchase.order'].search([('write_date', '<', expire_date), ('state', 'in', ['done', 'cancel'])]):
             record.write({'active': False})
