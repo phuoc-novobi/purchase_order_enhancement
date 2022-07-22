@@ -1,4 +1,4 @@
-odoo.define('purchase.phone.us.widget', function (require) {
+odoo.define('purchase_order_enhancement.phone_us_widget', function (require) {
     'use strict';
 
     var FieldChar = require('web.basic_fields').FieldChar;
@@ -18,7 +18,6 @@ odoo.define('purchase.phone.us.widget', function (require) {
         }),
         _onKeyup: function (e) {
             e.target.value = normalize(e.target.value)
-            console.log('event happen!')
         }
     });
 
