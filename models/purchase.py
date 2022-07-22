@@ -27,5 +27,6 @@ class PurchaseOrder(models.Model):
         today = fields.Datetime.today()
         lifespan = self.env.company.lifespan
         expire_date = today - timedelta(days=lifespan)
-        for record in self.env['purchase.order'].search([('write_date', '<', expire_date), ('state', 'in', ['done', 'cancel'])]):
-            record.write({'active': False})
+        old_orders = self.env['purchase.order'].search(
+            [('write_date', '<', expire_date), ('state', 'in', ['done', 'cancel'])])
+        old_orders.write({'active': False})

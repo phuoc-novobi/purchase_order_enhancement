@@ -19,7 +19,7 @@
         'views/purchase_views.xml',
         'views/res_config_settings.xml',
     ],
-    'application': True,
+    'application': False,
     'assets': {
         'web.assets_backend': [
             'purchase_order_enhancement/static/src/js/purchase_phone_us_widget.js'
