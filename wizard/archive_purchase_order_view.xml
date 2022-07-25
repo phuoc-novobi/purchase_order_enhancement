@@ -9,6 +9,7 @@
                 <footer>
                     <field name="button_archive_invisible" invisible="1"/>
                     <button name="action_archive" type="object" attrs="{'invisible': [('button_archive_invisible', '=', True)]}" class="btn-primary" string="Archive"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
@@ -22,5 +23,5 @@
         <field name="target">new</field>
     </record>
 
-    <menuitem id="menu_archive_attribute_action" action="archive_multiple_purchase_orders" parent="purchase.menu_purchase_config" sequence="1" groups="purchase.group_purchase_manager"/>
+    <menuitem id="menu_archive_attribute_action" action="archive_multiple_purchase_orders" parent="purchase.menu_purchase_config" sequence="0" groups="purchase.group_purchase_manager"/>
 </odoo>

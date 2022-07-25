@@ -5,9 +5,12 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_view_invoice']" position="after">
+            <xpath expr="//button[@name='action_view_invoice']" position="before">
                 <field name="active" invisible="1"/>
-                <button name="button_archive" type="object" class="oe_stat_button" attrs="{'invisible':['|', '&amp;', ('state', 'not in', ('done', 'cancel')), ('active', '=', True), ('active', '=', False)]}" icon="fa-archive" string="Archive" groups="purchase.group_purchase_manager"/>
+                <button name="action_archive" type="object" class="oe_stat_button" attrs="{'invisible':['|', '&amp;', ('state', 'not in', ('done', 'cancel')), ('active', '=', True), ('active', '=', False)]}" icon="fa-archive" string="Archive" groups="purchase.group_purchase_manager" />
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="us_phone_number" widget="us_phone_number_wget"/>
             </xpath>
         </field>
     </record>
@@ -21,18 +24,7 @@
                 <field name="active" invisible="1"/>
             </xpath>
             <xpath expr="//tree" position="attributes">
-                <attribute name="decoration-muted">(not active) or (state == 'cancel')</attribute>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="enhanced_purchase_order_form_us_phone_number" model="ir.ui.view">
-        <field name="name">enhanced.purchase.order.form.us.phone.number</field>
-        <field name="model">purchase.order</field>
-        <field name="inherit_id" ref="purchase.purchase_order_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="us_phone_number" widget="us_phone_number_wget"/>
+                <attribute name="decoration-muted">not active or state == 'cancel'</attribute>
             </xpath>
         </field>
     </record>
@@ -41,6 +33,7 @@
         <field name="name">enhanced.purchase.order.search</field>
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_manager'))]"/>
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='activities_exception']" position="after">
                 <separator/>
