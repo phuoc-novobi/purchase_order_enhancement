@@ -10,11 +10,11 @@ odoo.define('purchase_order_enhancement.phone_us_widget', function (require) {
         }),
         _onKeyup: function (e) {
             let phone = e.target.value;
+            // A normalize phone number function found on https://stackoverflow.com
             phone = phone.replace(/[^\d]/g, "");
             if (phone.length === 10)
-                e.target.value = phone.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
-            else
-                e.target.value = phone;
+                phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+            e.target.value = phone;
         }
     });
 

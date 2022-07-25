@@ -22,6 +22,12 @@ class PurchaseOrder(models.Model):
                 'You cannot archive Purchase Orders that are not done/cancelled!')
         self.write({'active': False})
 
+    def action_unarchive(self):
+        if not self.env.user.user_has_groups('purchase.group_purchase_manager'):
+            raise UserError(
+                'Only Administrators are allowed to unarchive records!')
+        self.write({'active': True})
+
     def _schedule_archive(self):
         today = fields.Datetime.today()
         lifespan = self.env.company.lifespan
