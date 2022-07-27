@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_purchase_order_search_add_payment_term" model="ir.ui.view">
+        <field name="name">view.purchase.order.search.add.payment.term</field>
+        <field name="model">purchase.report</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='group_date_approve_month']" position="after">
+                <filter string="Payment Term" name="payment_term" context="{'group_by':'payment_term_id'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
