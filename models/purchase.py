@@ -13,8 +13,12 @@ class PurchaseOrder(models.Model):
     def _check_archivability(self):
         return len(self.filtered(lambda record: record.state not in ['done', 'cancel'])) > 0
 
+    @api.model
+    def _check_accessability(self):
+        return self.env.user.user_has_groups('purchase.group_purchase_manager')
+
     def action_archive(self):
-        if not self.env.user.user_has_groups('purchase.group_purchase_manager'):
+        if not self._check_accessability():
             raise UserError(
                 'Only Administrators are allowed to archive records!')
         if self._check_archivability():
@@ -23,7 +27,7 @@ class PurchaseOrder(models.Model):
         self.write({'active': False})
 
     def action_unarchive(self):
-        if not self.env.user.user_has_groups('purchase.group_purchase_manager'):
+        if not self._check_accessability():
             raise UserError(
                 'Only Administrators are allowed to unarchive records!')
         self.write({'active': True})

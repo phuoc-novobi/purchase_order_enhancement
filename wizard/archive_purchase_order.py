@@ -20,10 +20,4 @@ class ArchivePurchaseOrder(models.TransientModel):
             self.archive_purchase_order_ids) > 0 else True
 
     def action_archive(self):
-        if not self.env.user.user_has_groups('purchase.group_purchase_manager'):
-            raise UserError(
-                'Only Administrators are allowed to archive records!')
-        if len(self.archive_purchase_order_ids.filtered(lambda record: record.state not in ['done', 'cancel'])) > 0:
-            raise UserError(
-                'You cannot archive Purchase Orders that are not done/cancelled!')
-        self.archive_purchase_order_ids.write({'active': False})
+        self.archive_purchase_order_ids._check_accessability()
